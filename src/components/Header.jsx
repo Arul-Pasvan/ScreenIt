@@ -1,10 +1,16 @@
 import React from "react";
-import { Image } from "react-native";
+import { Image, View, Text } from "react-native";
 import styles from "../styles/styles";
 
-function Header() {
+function Header({ text }) {
   return (
-    <Image style={styles.logo} source={require("../../assets/logoTitle.png")} />
+    <View style={styles.title}>
+      <Image
+        style={styles.logo}
+        source={require("../../assets/logoTitle.png")}
+      />
+      <Text style={styles.head}>{text}</Text>
+    </View>
   );
 }
 

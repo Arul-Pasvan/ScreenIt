@@ -1,8 +1,13 @@
-import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
-import { TextInput } from "react-native-paper";
+import { View, Text } from "react-native";
+
 import styles from "../styles/styles";
 import Header from "../components/Header";
+import {
+  CustomButton,
+  CustomInput,
+  BottomButton,
+} from "../components/CustomComponents";
 
 function SignUpScreen({ navigation }) {
   return (
@@ -14,28 +19,19 @@ function SignUpScreen({ navigation }) {
       <Text style={styles.forgotContent}>
         Enter your email and we'll send you the OTP
       </Text>
-      <TextInput
-        style={{ width: "95%", alignSelf: "center" }}
-        backgroundColor="#fff"
-        activeUnderlineColor="green"
-        label="Email."
-        keyboardType="email-address"
-      ></TextInput>
 
-      <TouchableOpacity
-        style={styles.signInBtn}
+      <CustomInput label="Email." keyboardType="email-address" />
+
+      <CustomButton
         onPress={() => navigation.navigate("Verification")}
-      >
-        <Text style={styles.signIn}>Send OTP</Text>
-      </TouchableOpacity>
+        btn="Send OTP"
+      />
 
-      <TouchableOpacity
-        style={styles.signUpBtn}
+      <BottomButton
         onPress={() => navigation.navigate("Login")}
-      >
-        <Text>Already have an account? </Text>
-        <Text style={styles.signUp}> Sign In</Text>
-      </TouchableOpacity>
+        t1="Already have an account? "
+        t2=" Sign In"
+      />
     </View>
   );
 }

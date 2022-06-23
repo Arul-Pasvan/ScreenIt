@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Image, Modal } from "react-native";
 import StarRating from "react-native-star-rating-widget";
-import { TextInput } from "react-native-paper";
 import { AntDesign } from "@expo/vector-icons";
 
 import Header from "../components/Header";
 import styles from "../styles/styles";
+import { CustomInput, CustomButton } from "../components/CustomComponents";
 
 function SkillScreen() {
   const [rating, setRating] = useState(0);
@@ -19,11 +19,9 @@ function SkillScreen() {
 
       <Text style={styles.name}>Hi Pasvan</Text>
       <Text style={styles.experience}>Skills</Text>
-      <TextInput
-        backgroundColor="#FFF"
-        activeUnderlineColor="#14C38E"
-        label="Add Skills*"
-      ></TextInput>
+
+      <CustomInput label="Add Skills*" />
+
       <View style={styles.star}>
         <Text style={{ color: "gray", fontSize: 16 }}>Skill Rating*</Text>
         <StarRating
@@ -32,12 +30,8 @@ function SkillScreen() {
           onChange={setRating}
         />
       </View>
-      <TouchableOpacity
-        style={styles.signInBtn}
-        onPress={() => console.log("Skill Added.")}
-      >
-        <Text style={styles.signIn}>Add</Text>
-      </TouchableOpacity>
+
+      <CustomButton onPress={() => console.log("Skill Added.")} btn="Add" />
 
       <Modal
         animationType="slide"

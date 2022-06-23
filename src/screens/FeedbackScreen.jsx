@@ -1,10 +1,12 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import ProfileData from "../components/ProfileData";
+import styles from "../styles/styles";
 
 function FeedbackScreen() {
   return (
     <View>
-      <Text>Feedback Screen.</Text>
+      <ProfileData />
     </View>
   );
 }

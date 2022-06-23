@@ -1,16 +1,46 @@
 import React, { useRef, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text } from "react-native";
 import { TextInput, Checkbox } from "react-native-paper";
 import PhoneInput from "react-native-phone-number-input";
 import RNPickerSelect from "react-native-picker-select";
+import { firebase, db } from "../../firebase";
 
 import styles from "../styles/styles";
 import Header from "../components/Header";
+import { CustomInput, CustomButton } from "../components/CustomComponents";
 
 function SignUpScreenValidated({ navigation }) {
   const phoneInput = useRef(null);
-  const [phone, setPhone] = useState("");
   const [isSelected, setSelection] = useState(false);
+
+  const [user, setUser] = useState({
+    fName: "",
+    lName: "",
+    role: "",
+    email: "",
+    password: "",
+    phone: "",
+  });
+
+  const handleSignUp = async (email, password, fName, lName, phone, role) => {
+    try {
+      const authUser = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+
+      db.collection("users").doc(authUser.user.email).set({
+        owner_uuid: authUser.user.uid,
+        fName: fName,
+        lName: lName,
+        email: email,
+        role: role,
+        phone: phone,
+      });
+      isSelected && navigation.navigate("Experience");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -22,21 +52,22 @@ function SignUpScreenValidated({ navigation }) {
       </View>
 
       {/* --------------- Input Section --------------------- */}
+
       <View style={styles.inputText}>
-        <TextInput
-          backgroundColor="#FFF"
-          activeUnderlineColor="#14C38E"
+        <CustomInput
           label="First Name"
-        ></TextInput>
-        <TextInput
-          backgroundColor="#FFF"
-          activeUnderlineColor="#14C38E"
+          value={user.fName}
+          onChange={(val) => setUser({ ...user, fName: val })}
+        />
+        <CustomInput
           label="Last Name"
-        ></TextInput>
+          value={user.lName}
+          onChange={(val) => setUser({ ...user, lName: val })}
+        />
 
         <View style={{ borderBottomWidth: 1, borderBottomColor: "gray" }}>
           <RNPickerSelect
-            onValueChange={(value) => console.log(value)}
+            onValueChange={(val) => setUser({ ...user, role: val })}
             items={[
               { key: 1, label: "Interviewer", value: "interviewer" },
               { key: 2, label: "Candidate", value: "candidate" },
@@ -45,30 +76,34 @@ function SignUpScreenValidated({ navigation }) {
           />
         </View>
 
-        <TextInput
-          label="Email"
-          value="pasvan.g@truetechsolutions.in"
-          disabled="true"
-          backgroundColor="#FFF"
+        <CustomInput
+          label="Email."
+          value={user.email}
+          onChange={(val) => setUser({ ...user, email: val })}
         />
+
         <PhoneInput
           ref={phoneInput}
-          defaultValue={phone}
+          defaultValue={user.phone}
           // defaultCode="IN"
           layout="second"
-          onChangeText={(text) => {
-            setPhone(text);
+          onChangeText={(val) => {
+            setUser({ ...user, phone: val });
           }}
           withShadow
         />
+
         <TextInput
           backgroundColor="#FFF"
           style={{ backgroundColor: "#FFF" }}
           activeUnderlineColor="#14C38E"
           label="Password."
+          value={user.password}
+          onChangeText={(val) => setUser({ ...user, password: val })}
           secureTextEntry
           right={<TextInput.Icon name="eye-off" />}
         ></TextInput>
+
         <View style={{ flexDirection: "row", marginTop: 10 }}>
           <Checkbox
             status={isSelected ? "checked" : "unchecked"}
@@ -79,14 +114,21 @@ function SignUpScreenValidated({ navigation }) {
           </Text>
         </View>
       </View>
-      <TouchableOpacity
-        style={styles.signInBtn}
+
+      <CustomButton
         onPress={() => {
           isSelected ? navigation.navigate("Experience") : null;
+          // handleSignUp(
+          //   user.email,
+          //   user.password,
+          //   user.fName,
+          //   user.lName,
+          //   user.phone,
+          //   user.role
+          // );
         }}
-      >
-        <Text style={styles.signIn}>Sign Up</Text>
-      </TouchableOpacity>
+        btn="Sign Up"
+      />
     </View>
   );
 }

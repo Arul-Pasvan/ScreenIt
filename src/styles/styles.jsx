@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   logo: {
     height: 60,
     width: 230,
-    marginTop: 80,
+    marginTop: 70,
   },
   head: {
     marginTop: 40,
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     color: "#14C38E",
     alignSelf: "flex-end",
     marginTop: 10,
+    paddingRight: 10,
   },
   signInBtn: {
     width: "95%",
@@ -68,8 +69,9 @@ const styles = StyleSheet.create({
   },
   signUpBtn: {
     flexDirection: "row",
-    marginTop: 80,
+    marginTop: "auto",
     alignSelf: "center",
+    padding: 10,
   },
   signUp: {
     color: "#14C38E",
@@ -97,38 +99,53 @@ const styles = StyleSheet.create({
   verifyBtn: {
     width: "100%",
     height: 50,
+    marginTop: "auto",
     backgroundColor: "#00FFAB",
     color: "#FFF",
     justifyContent: "center",
+  },
+  nameD: {
+    fontSize: 22,
+    fontWeight: "bold",
+    paddingHorizontal: 30,
+    paddingBottom: 30,
   },
   next: {
     flexDirection: "row",
     backgroundColor: "#00FFAB",
     justifyContent: "space-evenly",
-    width: "25%",
-    height: 40,
+    width: "30%",
+    height: 45,
     alignSelf: "flex-end",
-    margin: 20,
+    marginHorizontal: 10,
+    marginVertical: 20,
     borderRadius: 8,
   },
   modal: {
-    backgroundColor: "pink",
-    //flex: "0.1",
-    height: "50%",
+    backgroundColor: "#e9f5f9",
+    height: "55%",
     marginTop: "auto",
   },
   modalText: {
     alignSelf: "center",
     marginBottom: 10,
     fontWeight: "bold",
+    fontSize: 16,
+  },
+  modalList: {
+    marginVertical: 10,
+    flexDirection: "row",
+    paddingHorizontal: 10,
   },
   experience: {
-    fontSize: 20,
-    paddingHorizontal: 40,
+    fontSize: 18,
+    paddingHorizontal: 30,
     paddingVertical: 15,
     borderWidth: 1,
-    backgroundColor: "#FFF",
+    backgroundColor: "#Ededf5",
   },
+  listText: { paddingLeft: 10, color: "gray" },
+  nextText: { color: "#fff", fontSize: 20, alignSelf: "center" },
   name: { fontSize: 22, fontWeight: "bold", padding: 40 },
   star: {
     flexDirection: "row",
@@ -137,5 +154,8 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     alignItems: "center",
   },
+  icon: { color: "#fff", alignSelf: "center" },
+  expText: { padding: 10, marginTop: 20, marginBottom: -28 },
+  nameTag: { fontSize: 20, paddingHorizontal: 30 },
 });
 export default styles;

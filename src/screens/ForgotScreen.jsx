@@ -1,7 +1,12 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { TextInput } from "react-native-paper";
+import { View, Text } from "react-native";
 import styles from "../styles/styles";
+
+import {
+  CustomButton,
+  CustomInput,
+  BottomButton,
+} from "../components/CustomComponents";
 
 function ForgotScreen({ navigation }) {
   return (
@@ -11,25 +16,16 @@ function ForgotScreen({ navigation }) {
         Enter your registered email and we'll send you the link to reset
         password.
       </Text>
-      <TextInput
-        style={{ width: "95%", alignSelf: "center" }}
-        backgroundColor="#fff"
-        activeUnderlineColor="green"
-        label="Email."
-        keyboardType="email-address"
-      ></TextInput>
 
-      <TouchableOpacity style={styles.signInBtn}>
-        <Text style={styles.signIn}>Get OTP</Text>
-      </TouchableOpacity>
+      <CustomInput label="Email." keyboardType="email-address" />
 
-      <TouchableOpacity
+      <CustomButton btn="Get OTP" />
+
+      <BottomButton
         onPress={() => navigation.navigate("Login")}
-        style={styles.signUpBtn}
-      >
-        <Text>Back to </Text>
-        <Text style={styles.signUp}> Sign In</Text>
-      </TouchableOpacity>
+        t1="Back to "
+        t2=" Sign In"
+      />
     </View>
   );
 }
